@@ -1,0 +1,3 @@
+---
+nvidia_docker_key: "https://nvidia.github.io/nvidia-docker/gpgkey"
+nvidia_docker_list: "https://nvidia.github.io/nvidia-docker/ubuntu18.04/nvidia-docker.list"

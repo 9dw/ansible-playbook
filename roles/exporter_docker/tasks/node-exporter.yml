@@ -1,0 +1,16 @@
+---
+- name: docker-py install
+  pip: 
+    name: docker-py
+
+- name: run node-exporter
+  docker_container:
+    name: node-exporter
+    state: started
+    image: "{{node_exporter_image}}"
+    volumes:
+      - /:/host:ro,rslave
+    network_mode: host
+    pid_mode: host
+    restart: yes
+    command: --path.rootfs /host

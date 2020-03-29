@@ -1,0 +1,3 @@
+---
+nvidia_dcgm_exporter_image: nvidia/dcgm-exporter
+node_exporter_image: quay.io/prometheus/node-exporter

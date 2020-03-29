@@ -1,0 +1,22 @@
+---
+- name: Add nvidia-docker GPG key
+  apt_key:
+    url: "{{ nvidia_docker_key }}"
+    state: present
+
+- name: Add nvidia-docker repository
+  get_url:
+    url: "{{ nvidia_docker_list }}"
+    dest: /etc/apt/sources.list.d/nvidia-docker.list
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install nvidia-docker
+  apt:
+    update_cache: yes
+    state: latest
+    pkg: nvidia-docker2
+
+- name: Restart docker for changes to take effect
+  shell: /bin/bash -lc "pkill -SIGHUP dockerd"

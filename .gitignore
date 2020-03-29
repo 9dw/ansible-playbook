@@ -1,0 +1,36 @@
+# 全てのファイルを一度、無視
+/*
+
+# さらに、ドットから始まる設定ファイルを無視
+/.*
+
+# "無視したくないファイル"は以下に"![ファイル名]"で指定
+##### Gitで管理するファイルリスト #####
+!/.bundle
+!/.gitignore
+!/.gitconfig
+!/.gitmodules
+!/.rspec
+!/ansible.cfg
+!/filter_plugins
+!/Gemfile.lock
+!/Gemfile
+!/hosts
+!/host_vars
+!/inventory
+!/library
+!/LICENSE
+!/module_utils
+!/playbook
+!/Rakefile
+!/README.md
+!/roles
+!/spec
+
+# 上記に"無視したくないファイル"としてリスト化した中から、さらに"無視したいファイル"を指定
+*.log
+*.swp
+*.retry
+.ruby-version
+.vscode
+.keep

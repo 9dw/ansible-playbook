@@ -1,0 +1,10 @@
+---
+- name: Install required packages
+  apt: 
+    update_cache: yes
+    state: latest
+    pkg:
+      - ubuntu-drivers-common
+
+- name: install driver packages
+  shell: /bin/bash -lc "ubuntu-drivers autoinstall"

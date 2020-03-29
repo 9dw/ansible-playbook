@@ -1,0 +1,6 @@
+---
+- name: install nvidia-driver
+  import_tasks: autoinstall.yml
+
+# - name: install nvidia-driver
+#   import_tasks: nvidia-driver-install.yml

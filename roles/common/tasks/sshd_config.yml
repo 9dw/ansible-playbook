@@ -1,0 +1,15 @@
+---
+- name: remove /etc/ssh/sshd_config Unnecessary comment out
+  replace: 
+    dest: /etc/ssh/sshd_config
+    regexp: "{{item.regexp}}"
+    replace: "{{item.replace}}"
+  with_items:
+    - regexp: '^#PubkeyAuthentication yes$'
+      replace: 'PubkeyAuthentication yes'
+    - regexp: '^PasswordAuthentication no$'
+      replace: '#PasswordAuthentication no'
+    - regexp: '^#AuthorizedKeysFile'
+      replace: 'AuthorizedKeysFile'
+  tags:
+    - sshd

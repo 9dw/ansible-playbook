@@ -1,0 +1,15 @@
+---
+- name: Add nvidia-driver GPG key
+  apt_key:
+    url: "{{ nvidia_driver_ubuntu_cuda_repo_gpgkey_url }}"
+    id: "{{ nvidia_driver_ubuntu_cuda_repo_gpgkey_id }}"
+
+- name: Add nvidia-driver repository
+  apt_repository:
+    repo: "deb {{ nvidia_driver_ubuntu_cuda_repo_baseurl }} /"
+    update_cache: yes
+
+- name: install driver packages
+  apt:
+    name: "{{ nvidia_driver_package_version }}"
+    state: present

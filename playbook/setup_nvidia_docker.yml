@@ -1,0 +1,20 @@
+---
+- name: install docker
+  hosts: all
+  become: true
+  roles:
+    - { role: common, tags: common }
+    - { role: docker, tags: docker }
+
+- name: install nvidia-docker
+  hosts: all
+  become: true
+  roles:
+    - { role: nvidia_driver, tags: nvidia_driver }
+    - { role: nvidia_docker, tags: nvidia_docker }
+
+- name: set nvidia-dcgm-exporter
+  hosts: all
+  become: true
+  roles:
+    - { role: nvidia_dcgm_exporter, tags: nvidia_dcgm_exporter }

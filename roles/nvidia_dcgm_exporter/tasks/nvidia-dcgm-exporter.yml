@@ -1,0 +1,28 @@
+---
+- name: docker-py install
+  pip: 
+    name: docker==2.4.0
+
+- name: run nvidia-dcgm-exporter
+  docker_container:
+    name: nvidia-dcgm-exporter
+    state: started
+    image: "{{nvidia_dcgm_exporter_image}}"
+    volumes:
+      - /run/prometheus:/run/prometheus
+    runtime: nvidia
+    restart: yes
+
+- name: Add the GPU metrics directly to node-expoter container
+  docker_container:
+    name: node_exporter
+    state: started
+    image: "{{ node_exporter_image }}"
+    volumes:
+      - /:/host:ro,rslave
+    volumes_from:
+      - nvidia-dcgm-exporter:ro
+    network_mode: host
+    pid_mode: host
+    restart: yes
+    command: --path.rootfs /host --collector.textfile.directory="/run/prometheus"

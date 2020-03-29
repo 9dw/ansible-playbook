@@ -1,0 +1,27 @@
+---
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Register distribution name
+  shell: /bin/bash -lc "lsb_release -cs"
+  ignore_errors: True
+  register: lsb_release
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+    state: present
+    filename: docker
+
+- name: Install docker-ce
+  apt:
+    update_cache: yes
+    state: latest
+    pkg: docker-ce
+
+- name: Systemctl docker-deamon
+  systemd: 
+    name: docker
+    enabled: yes

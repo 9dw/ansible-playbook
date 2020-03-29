@@ -1,0 +1,13 @@
+---
+- name: install docker, docker-compose
+  hosts: all
+  become: true
+  roles:
+    - { role: common, tags: common }
+    - { role: docker, tags: docker }
+
+- name: set node-exporter
+  hosts: all
+  become: true
+  roles:
+    - { role: exporter_docker, tags: exporter_docker }

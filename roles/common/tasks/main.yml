@@ -1,0 +1,8 @@
+---
+- name: ubuntuの基本設定
+  import_tasks: packages.yml
+  tags: [ common ]
+
+- name: sshdの設定変更
+  import_tasks: sshd_config.yml 
+  tags: [ sshd ]

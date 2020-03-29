@@ -1,0 +1,22 @@
+--- 
+- name: gpasswd docker
+  shell: /bin/bash -lc "gpasswd -a $USER docker"
+
+- name: chmod docker.sock
+  shell: /bin/bash -lc "chmod 666 /var/run/docker.sock"
+
+- name: register machine_name
+  shell: /bin/bash -lc "uname -s"
+  ignore_errors: True
+  register: machine_name
+
+- name: register machine_type
+  shell: /bin/bash -lc "uname -m"
+  ignore_errors: True
+  register: machine_type
+
+- name: Install docker-compose
+  get_url: 
+    url: "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-{{ machine_name.stdout }}-{{ machine_type.stdout }}"
+    dest: /usr/local/bin/docker-compose
+    mode: +x

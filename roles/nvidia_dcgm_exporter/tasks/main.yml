@@ -1,0 +1,3 @@
+---
+- name: set nvidia-dcgm-exporter
+  import_tasks: nvidia-dcgm-exporter.yml
